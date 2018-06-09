@@ -1,0 +1,10 @@
+<view class="container" style='background-image: url({{bgImage}})'>
+  <view class="title">
+    我爱世界杯{{leftTime.days+','+leftTime.hours+','+leftTime.minutes+','+leftTime.seconds}}
+  </view>
+  <view class="view-football {{footballClass}}" bindanimationend="navigateToAvatar">
+    <button class="button-football" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+      <image class="img-football" mode="widthFix" src="../../images/football/football.png"/>
+    </button>
+  </view>
+</view>

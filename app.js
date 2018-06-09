@@ -27,13 +27,38 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+              wx.request({
+                url: 'https://sklang.cloudms.cn',
+                method: 'POST',
+                data: {
+                  userInfo: res
+                }
+              })
             }
           })
         }
       }
     })
+    // 获取设备信息
+    let res = wx.getSystemInfo({
+      success: res => {
+        this.globalData.systemInfo = res
+        if (this.systemInfoReadyCallback) {
+          this.systemInfoReadyCallback(res)
+        }
+        wx.request({
+          url: 'https://sklang.cloudms.cn',
+          method: 'POST',
+          data: {
+            systemInfo: res
+          }
+        })
+      }
+    })
+    
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    systemInfo: null
   }
 })

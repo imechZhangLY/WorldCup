@@ -14,6 +14,21 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const leftTime = time => {
+  let days = formatNumber(parseInt(time / 1000 / 60 / 60 / 24, 10)); //计算剩余的天数 
+  let hours = formatNumber(parseInt(time / 1000 / 60 / 60 % 24, 10)); //计算剩余的小时 
+  let minutes = formatNumber(parseInt(time / 1000 / 60 % 60, 10));//计算剩余的分钟 
+  let seconds = formatNumber(parseInt(time / 1000 % 60, 10));//计算剩余的秒数 
+  console.log(days)
+  return {
+    days: days,
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds
+  }
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  leftTime: leftTime
 }
