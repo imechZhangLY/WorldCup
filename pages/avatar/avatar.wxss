@@ -46,9 +46,9 @@ html{
 .container {
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: 100%;
-  /* background-image: url("https://sklang.cloudms.cn/img/Russian.png");  */
+  background-image: url("https://sklang.cloudms.cn/img/darkbluebg.png");  
 }
 .loadpage {
   width: 100%;
@@ -180,17 +180,17 @@ html{
   display: block;
 }
 .userAvatar {
-  margin-top: 15rpx;
+  margin-top: 40rpx;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 600rpx;
+  height: 500rpx;
 }
 
 .middle {
   width: 500rpx;
   height: 500rpx;
-  margin: 20rpx auto;
+  margin: 15rpx auto 0 auto;
   /* border-radius: 50%; */
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -240,8 +240,8 @@ html{
 
 .buttonList {
   margin-top: 10rpx;
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   align-items: center;
   height: 30rpx;
   color: white;
@@ -311,26 +311,26 @@ html{
 
 .iconCards{
     position: relative;
-    margin: 500rpx auto;
+    margin: 0rpx auto;
     width: 360rpx;
-    height: 500rpx;
+    height: 400rpx;
 }
 .card-left{
     position: absolute;
     width: 100%;
     height: 100%;
-    right: 50%;
-    transform: translate(-50%,0) scale(0.9);
+    left: 50%;
+    transform: translate(-150%,0) scale(0.9);
     opacity: 0.7;
-    transition: transform 0.5s;
+    transition: all 0.5s;
 }
 .card-lefthidden{
     position: absolute;
     width: 100%;
     height: 100%;
-    right: 50%;
-    transform: translate(-150%,0) scale(0.9);
-    /* transition: transform 0.5s; */
+    left: 50%;
+    transform: translate(-250%,0) scale(0.9);
+    transition: all 0.5s; 
 }
 .card-right{
     position: absolute;
@@ -339,7 +339,7 @@ html{
     left: 50%;
     transform: translate(50%,0) scale(0.9);
     opacity: 0.7;
-    transition: transform 0.5s;
+    transition: all 0.5s;
 }
 .card-righthidden{
     position: absolute;
@@ -347,13 +347,15 @@ html{
     height: 100%;
     left: 50%;
     transform: translate(150%,0) scale(0.9);
-    /* transition: transform 0.5s; */
+    transition: all 0.5s; 
 }
 .card{
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s;
+    left: 50%;
+    transform: translate(-50%,0) scale(1);
+    transition: all 0.5s;
 }
 .card-top{
     margin: 0 auto;
@@ -384,13 +386,13 @@ html{
     text-align: center;
 }
 .icon-img {
-    width: 50rpx;
-    height: auto;
+  width: 50rpx;
 }
 .card-bottom{
     position: absolute;
     display: block;
     width: 100%;
+    height: 22.5%;
     bottom: 0;
     transform: translate(0,100%);
 }
@@ -398,9 +400,9 @@ html{
 .cards-pre, .cards-next{
     margin-top: 255rpx;
     transform: translate(0, -35%);
-    width: 50rpx;
-    height: 50rpx;
-    border-radius: 25rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
     background: rgba(0,0,0,0.3);
 }
 .cards-pre {
@@ -418,10 +420,130 @@ html{
     height: 100%;
     text-align: center;
     color: white;
-    background: rgba(0,0,0,0.3);border-radius: 25rpx;
-    font-size: 25rpx;
-    line-height: 50rpx;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    font-size: 50rpx;
+    line-height: 60rpx;
 }
 .cards-next::after{
     content: ">";
+}
+.btns{
+  margin: 40rpx auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  font-size: 25rpx;
+  color: white;
+}
+.btns view{
+  background: rgba(190,180,140,0.95);
+  padding: 10rpx 15rpx;
+  border-radius: 15rpx;
+  position: relative;
+}
+.editWindow{
+  margin: 0 auto;
+  width: 80%;
+  position: relative;
+  color: white;
+  /* background:linear-gradient(to right,rgba(234,173,92,0.5), rgba(234,173,92,1), rgba(234,173,92,0.5)); */
+   background: radial-gradient(rgba(190,180,140,1) 40%,rgba(27,78,182,1)); 
+  border-radius: 40%; 
+}
+.editWindow .scale, .editWindow .rotate{
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.editWindow .done{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: rgba(243,71,34,0.8);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  position: relative;
+  width: 150rpx;
+  height: 100rpx;
+  margin: 30rpx;
+  border-radius: 15rpx;
+  background: rgba(243,71,34,0.7);
+  /* text-align: center;
+  line-height: 100rpx; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnLT::after{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: "";
+  width: 40rpx;
+  height: 40rpx;
+  border-top-left-radius: 120% ;
+  background: rgba(190,180,140,1);
+  z-index: 99;
+}
+.btnRT::after{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 40rpx;
+  height: 40rpx;
+  border-top-right-radius: 120% ;
+  background: rgba(190,180,140,1);
+  z-index: 99;
+}
+.btnLB::after{
+  position: absolute;
+  right: 0;
+  top: 0;
+  content: "";
+  width: 40rpx;
+  height: 40rpx;
+  border-bottom-left-radius: 120% ;
+  background: rgba(190,180,140,1);
+  z-index: 99;
+}
+.btnRB::after{
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 40rpx;
+  height: 40rpx;
+  border-bottom-right-radius: 120% ;
+  background: rgba(190,180,140,1);
+  z-index: 99;
+}
+.hidden-canvas{
+  position:fixed;
+  width: 500rpx; 
+  height: 500rpx;
+  visibility:hidden;
+}
+.edit::after{
+  position: absolute;
+  background: rgba(100,100,100,0.5);
+  /* padding: 10rpx 15rpx; */
+  border-radius: 15rpx;
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }

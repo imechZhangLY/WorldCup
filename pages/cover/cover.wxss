@@ -5,9 +5,13 @@ html{
 .container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   background-repeat: no-repeat;
   background-size: 100%;
-  /* background-image: url('https://sklang.cloudms.cn/img/gate.png') */
+  align-items: center;
+  justify-content: space-between;
+   background-image: url('https://sklang.cloudms.cn/img/gate.png') 
 }
 .view-football{
   width: 25%;

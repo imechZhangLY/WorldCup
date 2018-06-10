@@ -1,4 +1,4 @@
-<view class="container" style='background-image: url({{bgImage}})'>
+<view class="container">
   <view class="title">
     我爱世界杯{{leftTime.days+','+leftTime.hours+','+leftTime.minutes+','+leftTime.seconds}}
   </view>

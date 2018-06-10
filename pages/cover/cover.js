@@ -30,7 +30,7 @@ Page({
     })
     let interval = setInterval(() => {
       let leftTime = util.leftTime(new Date(2018, 5, 14, 23, 0, 0) - new Date())
-      console.log(leftTime)
+      // console.log(leftTime)
       this.setData({
         leftTime: leftTime
       })

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" style="background-image:url({{bgImage}})">
+<view class="container">
   <view wx:if="{{!isReady}}" class="loadpage">
 		<canvas canvas-id="loadCanvas" class="loadAnimate">
 			<image src="../../images/cup/WorldCup2018.png" mode="aspectFit" class="animateCup"></image>
@@ -12,7 +12,7 @@
 			<text class='fourth-point'>.</text>
 		</view>
 	</view>
-  <view wx:else class="main">
+  <block wx:else>
 		<view class="userInfo">
 			<!-- <text class="title">{{userInfo.nickName}}</text>
 			<text class="content">
@@ -24,28 +24,55 @@
       <image class='selectedIcons' wx:for="{{selectedIcons}}" wx:key="selectedIcons" src='{{item.path}}' data-key='{{index}}' catchtouchmove='move' catchtouchstart='getStartPosition' catchtouchend='getEndPosition' style="left:{{item.position[0]+'px'}};top:{{item.position[1]+'px'}};width:{{item.size[0]+'px'}};height:{{item.size[1]+'px'}};transform:rotate({{item.rotate+'deg'}})"></image>
       </view> 
     </view>
-
-    <view class="iconCards" bindtouchstart="touchStart" bindtouchend="touchEnd">
-      <view wx:for="{{cards}}" wx:for-item="card" class="{{card.className}}">
+<view class='btns'>
+<view class='{{status}}' data-status='{{status}}' bindtap='editStatus'>编辑</view>
+<view class='{{status}}' data-bgUrl='{{userInfo.avatarUrl}}' bindtap='saveAvatar'>保存</view>
+</view>
+    <view wx:if="{{status == 'select'}}" class="iconCards" bindtouchstart="touchStart" bindtouchend="touchEnd">
+       <view wx:for="{{cards}}" wx:for-item="card" class="{{card.className}}">
       <view class="card-top">
       {{card.title}}
       </view>
-      <view class="card-icons" bindtap="test">
+      <view class="card-icons" bindtap="test" data-tagname="{{card.title}}"  bindtap='selectOrNot'>
           <view wx:for="{{card.icons}}" wx:for-item="icon" class="card-icon">
-              <image class="icon-img" mode="widthFix" src="{{icon}}"></image>
+              <image class="icon-img" mode="widthFix" src="{{icon}}" data-path="{{icon}}"></image>
           </view>
       </view>
-      <image class="card-bottom" mode="widthFix" src="../../images/official_bottom_on.png">
+      <image class="card-bottom" src="../../images/official_bottom_on.png">
       </image>
-      </view>
-      <view class="cards-pre" bindtap="mypre">
+      </view> 
+       <view class="cards-pre" bindtap="mypre">
       </view>
       <view class="cards-next" bindtap="mynext">
-      </view>    
+      </view>     
     </view>
+    <block wx:else>
+      <view class='editWindow'>
+        <view class='scale'>
+          <view class='btn btnLT' data-direction='-' catchtap='iRotate'>
+            <image src='../../images/rotate_1.png' style='width:58.25rpx;height:50rpx;'></image>
+          </view>
+          <view class='btn btnRT' data-direction='+' catchtap='iRotate'>
+            <image src='../../images/rotate_2.png' style='width:58.25rpx;height:50rpx;'></image>
+          </view>
+        </view>
+        <view class='done' catchtap='selectStatue'>
+          <image src='../../images/done.png' style='width:50rpx;height:50rpx;'></image>
+        </view>
+        <view class='rotate'>
+          <view class='btn btnLB' data-direction='-' catchtap='changeSize'>
+            <image src='../../images/smaller.png' style='width:50rpx;height:50rpx;'></image>
+          </view>
+          <view class='btn btnRB' data-direction='+' catchtap='changeSize'>
+            <image src='../../images/bigger.png' style='width:50rpx;height:50rpx;'></image>
+          </view>
+        </view>
+      </view>
+    </block>
+        <canvas class="hidden-canvas" canvas-id='userinfo-avatar1'></canvas>
 
 
-<!--     
+<!--      
 		<view class="userAvatar">
 			<view class="side">
 				<text class="content">放大</text>
@@ -63,7 +90,7 @@
 				</view>
 				<text class="content">右旋</text>
 			</view>
-		</view> -->
+		</view>  -->
 		<!-- <view class="buttonList">
 			<view class="button click">
 				<text class="countries" decode="{{true}}">国&emsp;旗</text>
@@ -75,7 +102,7 @@
 		<!-- <view class="logo">
 
 		</view> -->
-	</view>
+	</block>
   <!-- <view class="userinfo"> -->
     <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
@@ -108,7 +135,7 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block> -->
   <!-- </view> -->
-  <view id="save" bindtap="saveCanvas"> 导出图片 </view>
+  <!-- <view id="save" bindtap="saveCanvas"> 导出图片 </view> -->
   <!-- <image id="afterImage" src='{{saveImage}}'></image> -->
   <!-- <view class="usermotto">
     <text class="user-motto">{{motto}}{{getRequest}}</text>

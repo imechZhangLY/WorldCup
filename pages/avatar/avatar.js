@@ -169,6 +169,7 @@ Page({
     cards: [],
     currentCard: 1,
     touchStart: 0,
+    status: 'select'
   },
 
   //事件处理函数
@@ -249,17 +250,19 @@ Page({
       })
     }
 
-    // if(app.globaData.systemInfo){
-    //   this.setData({
-    //     normalizedValue: app.globaData.systemInfo.screenWidth / 750
-    //   })
-    // }else{
-    //   app.systemInfoReadyCallback = res => {
-    //     this.setData({
-    //       normalizedValue: res.screenWidth / 750
-    //     })
-    //   }
-    // }
+    if(app.globalData.systemInfo){
+      this.setData({
+        normalizedValue: app.globalData.systemInfo.screenWidth / 750
+      })
+      console.log('sys',this.data.normalizedValue)
+    }else{
+      app.systemInfoReadyCallback = res => {
+        this.setData({
+          normalizedValue: res.screenWidth / 750
+        })
+        console.log(this.data.normalizedValue)
+      }
+    }
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -319,7 +322,10 @@ Page({
       }
     })
   },
-
+  saveAvatar: function(e){
+    this.drawCanvas(e)
+    this.saveCanvas(e)
+  },
   switchTag: function(e) {
     let tagName = e.target.dataset.tagname
     let key = (tagName == 'emblem' || tagName == 'flag') ? 'nations' : tagName
@@ -331,12 +337,13 @@ Page({
 
   selectOrNot: function(e) {
     let rate = this.data.normalizedValue
-    let data = e.target.dataset
+    console.log(rate)
+    let path = e.target.dataset.path
     this.selectedIcons = this.selectedIcons ? this.selectedIcons : {}
-    this.selectedIcons[data.tagname + data.id] = this.selectedIcons[data.tagname + data.id] ? this.selectedIcons[data.tagname + data.id] : {}
-    this.currentIcon = this.currentIcon ? this.currentIcon : data.tagname + data.id
-    this.selectedIcons[data.tagname + data.id] = {
-      path: this.selectedIcons[data.tagname + data.id].path ? null : data.path,
+    this.selectedIcons[path] = this.selectedIcons[path] ? this.selectedIcons[path] : {}
+    this.currentIcon = this.currentIcon ? this.currentIcon : path
+    this.selectedIcons[path] = {
+      path: this.selectedIcons[path].path ? null : path,
       position: [0, 0],
       size: [100*rate, 100*rate],
       rotate: 0
@@ -345,7 +352,7 @@ Page({
     for(let key in this.selectedIcons){
       this.selectedIcons[key].path ? tempArr.push(key) : ''
     }
-    this.currentIcon = this.selectedIcons[data.tagname + data.id].path ? data.tagname + data.id : tempArr[tempArr.length-1]
+    this.currentIcon = this.selectedIcons[path].path ? path : tempArr[tempArr.length-1]
     console.log(this.selectedIcons, this.currentIcon)
     this.setData({
       selectedIcons: this.selectedIcons
@@ -376,9 +383,10 @@ Page({
   },
 
   changeSize: function(e) {
+    console.log(e)
     if(!this.currentIcon) return
     let speed = 10, ratio = this.selectedIcons[this.currentIcon].size[1] / this.selectedIcons[this.currentIcon].size[0]
-    if (e.target.dataset.direction == '-'){
+    if (e.currentTarget.dataset.direction == '-'){
       this.selectedIcons[this.currentIcon].size = this.selectedIcons[this.currentIcon].size[0] < 11 ? this.selectedIcons[this.currentIcon].size : this.selectedIcons[this.currentIcon].size.map((item, index) => {return item - speed*(1-(1-ratio)*index)})
     }else{
       this.selectedIcons[this.currentIcon].size = this.selectedIcons[this.currentIcon].size[0] > 149 ? this.selectedIcons[this.currentIcon].size : this.selectedIcons[this.currentIcon].size.map((item, index) => {return item + speed * (1 - (1 - ratio) * index) })
@@ -389,9 +397,10 @@ Page({
   },
 
   iRotate: function(e) {
+    console.log(e)
     if (!this.currentIcon) return
     let speed = 5
-    this.selectedIcons[this.currentIcon].rotate += (e.target.dataset.direction == '-' ? -speed : speed)
+    this.selectedIcons[this.currentIcon].rotate += (e.currentTarget.dataset.direction == '+' ? -speed : speed)
     this.setData({
       selectedIcons: this.selectedIcons
     })
@@ -483,6 +492,17 @@ Page({
       this.data.currentCard -= 1;
     }
     this.setData({ "cards": this.data.cards });
+  },
+
+  editStatus: function(e){
+    this.setData({
+      status: 'edit'
+    })
+  },
+  selectStatue: function(e){
+    this.setData({
+      status: 'select'
+    })
   }
 })
 
